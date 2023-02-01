@@ -1,3 +1,6 @@
 <?php
-    echo "Hello world";
+    phpinfo();
+    
+    //Man sieht die PHP Infoseite von 
+    //Server funktioniert leider nicht
 ?>
