@@ -1,35 +1,44 @@
-<h1>Pizza Konfigurator</h1>
-<p>Deine Pizza besteht aus folgenden Toppings:</p>
-<ul>
-    <?php  
-    
-    //Session starten
-    session_start();
+<?php
 
-    $toppings = array();
+//Session starten
+session_start();
 
-    //Daten verarbeiten
-    if (isset($_SESSION['toppings'])) {
-        $toppings[] = $_SESSION['toppings'];
+$toppings = [];
+
+//Daten lesen
+if (isset($_SESSION['toppings'])) {
+    $toppings = $_SESSION['toppings'];
+}
+
+//Daten verarbeiten
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $newTopping = array_key_exists('topping', $_POST) ? $_POST['topping'] : '';
+
+    if ($newTopping !== '') {
+        array_push($toppings, $newTopping);
     }
+}
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        //Daten speichern
-        if ($toppings) {
-            $_SESSION['toppings'] = $toppings;   
-        }
-        
-        $toppings[] = $_POST['topping'];
-    }
-    var_dump($_SESSION['toppings']);
+//Daten speichern
+$_SESSION['toppings'] = $toppings;
 
-    foreach ($toppings as $topping): ?>
-        <li><? echo $topping?></li>
-    <?php endforeach;?>
-</ul>
+var_dump($toppings);
 
-<div>Füge weitere Zutaten hinzu: </div>
-<form method="POST" action="">
-    <input type="text" name="topping" placeholder="Zutat" />
-    <input type="submit" value="Hinzufügen" />
-</form>
+?>
+
+    <h1>Pizza Konfigurator</h1>
+    <p>Deine Pizza besteht aus folgenden Toppings:</p>
+    <ul>
+        <?php foreach ($toppings as $value) :?>
+
+        <li><?= $value ?></li>
+    <?php endforeach; ?>
+    </ul>
+
+    <div>Füge weitere Zutaten hinzu: </div>
+    <form method="POST" action="?">
+        <input type="text" name="topping" placeholder="Zutat" />
+        <input type="submit" value="Hinzufügen" />
+    </form>
