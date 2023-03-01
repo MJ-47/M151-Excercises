@@ -40,7 +40,7 @@ $statement->execute([
 
 ?>
 
-<h1>Northwind</h1>
+<h1>Northwind Table</h1>
 <table>
 
   <tr>
