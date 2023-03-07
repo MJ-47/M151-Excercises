@@ -33,7 +33,7 @@ if (isset($_GET['id'])) {
     }
 }
 
-$sql = "SELECT * FROM customer WHERE id = :id";
+$sql = "SELECT * FROM customers WHERE id = :id";
 $statement = $conn->prepare($sql);
 
 $statement->execute([
@@ -66,5 +66,7 @@ else {
     <input type="text" id="company" name="company" value="<?= $preset ? $preset['company'] : '' ?>">
     <input type="text" id="first_name" name="first_name" value="<?= $preset ? $preset['first_name'] : '' ?>">
     <input type="text" id="last_name" name="last_name" value="<?= $preset ? $preset['last_name'] : '' ?>">
-    <input type="text" id="email_address" name="email_address" value="<?= $preset ? $preset['email_address'] : '' ?>">
+    <input type="email" id="email_address" name="email_address" value="<?= $preset ? $preset['email_address'] : '' ?>">
+
+    <button type="submit">Save</button>
 <form>
